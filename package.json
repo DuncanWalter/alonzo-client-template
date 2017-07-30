@@ -1,11 +1,16 @@
 {
   "name": "alonzo-client-template",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DuncanWalter/alonzo-client-template"
+  },
   "description": "A template for the specific homebrew of Vue, JSX, and Flowtype used in Alonzo",
   "main": "dist/index.bundle.js",
   "scripts": {
     "test": "test",
-    "dev": "node .\\scripts\\webpack.dev.js"
+    "dev": "node ./scripts/webpack.dev.js",
+    "prod": "node ./scripts/webpack.prod.js"
   },
   "author": "Duncan Walter",
   "license": "MIT",

@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var base = require('./webpack.base');
-var args = require('minimist')(process.argv.slice(2));
-var pkgs = require('./../package.json').dependencies;
+// var args = require('minimist')(process.argv.slice(2));
+// var pkgs = require('./../package.json').dependencies;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 var Express = require('express');
@@ -62,7 +62,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 });
 
 // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function (compilation) {
+compiler.plugin('compilation', function (/*compilation*/) {
     hotMiddleware.publish({ action: 'reload' });
 });
 
@@ -77,7 +77,7 @@ app.use(__dirname + './../', Express.static('/assets/'));
 
 app.use(function (req, res, next){
     let filePath;
-    if(/.*([a-zA-Z0-9_\-]+)\.plugin\.js$/.test(req.path)){
+    if(/.*([a-zA-Z0-9_-]+)\.plugin\.js$/.test(req.path)){
         filePath = __dirname + './../dist/index.bundle.js';
         // TODO enable plugin services
         res.send('console.log(\'plugin services not yet enabled\')');
@@ -111,4 +111,4 @@ devMiddleware.waitUntilValid(() => {
     console.log('> Listening at ' + uri + '\n');
 });
 
-var server = app.listen(3674);
+app.listen(3674);

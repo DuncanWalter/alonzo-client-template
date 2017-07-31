@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import App from './components/App.js'
+import App from './Components/App.js'
 
-// enables HMR
+// enables HMR // $FlowFixMe
 if(module.hot){ module.hot.accept(); }
 
 // HMR friendly bootstrapping for the modern era
-(function bootstrap(el, render){
+(function bootstrap(el){
     if(Vue.component('az-root') === undefined){
         console.log('> Bootstrapping app!');
         // (window||{}).__bootstrap__ = { hash: 0 };
@@ -37,7 +37,7 @@ export function plugin(name: string){
 
         let window = undefined;
         let document = undefined;
-        let process =undefined;
+        let process = undefined;
         let require = undefined;
         let exports = undefined;
         let xmlHttp = new XMLHttpRequest();
@@ -52,5 +52,5 @@ export function plugin(name: string){
             xmlHttp.send(null);
         }
     }
-};
+}
 

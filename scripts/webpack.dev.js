@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var base = require('./webpack.base');
 var args = require('minimist')(process.argv.slice(2));
 var pkgs = require('./../package.json').dependencies;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,32 +12,12 @@ var Express = require('express');
 //====================================================================//
 ////////////////////////////////////////////////////////////////////////
 
-const config = {
+let config = {
     entry: [
         './src/index.js',
-        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     ],
-    output: {
-        path: __dirname + './../dist',
-        filename: 'index.bundle.js',
-        library: 'alonzo-client-template',
-        libraryTarget: 'umd',
-    },
     devtool: 'cheap-eval-source-map',
-    module: { 
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    plugins: ['transform-vue-jsx'],
-                    presets: ['es2015', 'flow'],
-                    cacheDirectory: true,
-                }
-            }],
-        }],
-    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
@@ -49,6 +30,12 @@ const config = {
     ]
 };
 
+// mixin the base config underneath the dev config object
+Object.keys(base).reduce((acc, key) => {
+    acc[key] = acc[key] === undefined ? base[key] : acc[key];
+    return acc;
+}, config);
+
 ////////////////////////////////////////////////////////////////////////
 //====================================================================//
 ////////////////////////////////////////////////////////////////////////
@@ -59,7 +46,7 @@ var app = new Express();
 var compiler = webpack(config);
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-    publicPath: './assets/',
+    publicPath: '/',
     quiet: true,
     index: __dirname + 'index.bundle.html',
     watchOptions: {
@@ -86,7 +73,7 @@ app.use(devMiddleware);
 // compilation error display
 app.use(hotMiddleware);
 
-app.use(__dirname + './../assets', Express.static('/assets/'));
+app.use(__dirname + './../', Express.static('/assets/'));
 
 app.use(function (req, res, next){
     let filePath;
@@ -104,6 +91,7 @@ app.use(function (req, res, next){
             res.end();
         });
     } else if(/\.json$/.test(req.path)){
+        console.log('> HMR json requested...')
         next();
     } else {
         filePath = __dirname + './../dist/index.bundle.html';

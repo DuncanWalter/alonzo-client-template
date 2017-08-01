@@ -27,4 +27,4 @@ Key features of this template are:
 - Efficient Production Build
 - (Coming Soon) Lazy-Loading Arbitrary Code Securely
 - (Coming Soon) Simple Test Harness
-- (Coming Soon) CSS PreCompiling with LESS
+- CSS PreCompiling with Stylus

@@ -1,16 +1,19 @@
 import Vue from 'vue'
-import App from './Components/App.js'
+import { } from './components/app.js'
+import { inject } from './utils/plugins.js'
 
-// enables HMR // $FlowFixMe
-if(module.hot){ module.hot.accept(); }
+// Expose the global style glob for independent consumption
+export { default as styles } from './index.styl'
+export { plugin } from './utils/plugins.js'
 
 // HMR friendly bootstrapping for the modern era
 (function bootstrap(el){
+    inject({
+        'alonzo-client-template': module.exports
+    });
     if(Vue.component('az-root') === undefined){
         console.log('> Bootstrapping app!');
-        // (window||{}).__bootstrap__ = { hash: 0 };
         Vue.component('az-root', {
-            // data: ()=>(window||{}).__bootstrap_data__,
             render(){
                 return ( <az-app/> );
             },
@@ -21,36 +24,18 @@ if(module.hot){ module.hot.accept(); }
                 return( <az-root/> );
             },
         });
-        (window||{}).__vm__ = vm; 
+        (window||{}).__bootstrap__ = {
+            update: vm.$forceUpdate.bind(vm),
+            id: module.id,
+        };
     } else {
-        if((window||{}).__vm__){ window.__vm__.$forceUpdate(); }
+        if(((window||{}).__bootstrap__||{}).id === module.id){ window.__bootstrap__.update(); }
     }
 })(document.getElementById('anchor'));
 
-
-// The beginnings of a universal plugin library
-const modules = {};
-
-export function plugin(name: string){
-
-    if(modules[name] === undefined){
-
-        let window = undefined;
-        let document = undefined;
-        let process = undefined;
-        let require = undefined;
-        let exports = undefined;
-        let xmlHttp = new XMLHttpRequest();
-
-        xmlHttp.onreadystatechange = () => { 
-            if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
-                (str => {
-                    (new Function(str)).call(modules);
-                })(xmlHttp.responseText);
-            }
-            xmlHttp.open('GET', `localhost:3674/plugin/@{name}`, true); // true for asynchronous 
-            xmlHttp.send(null);
-        }
-    }
+if(module.hot){ 
+    // enables HMR // $FlowFixMe
+    module.hot.accept(); 
+    // console.log(module); 
 }
 

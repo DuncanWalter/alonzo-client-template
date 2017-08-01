@@ -1,5 +1,5 @@
 
-module.exports = {
+const base = {
     entry: './src/index.js',
     output: {
         path: __dirname + './../dist',
@@ -19,6 +19,25 @@ module.exports = {
                     cacheDirectory: true,
                 }
             }],
+        },{
+            test: /\.(styl|css)$/,
+            exclude: /node_modules/,
+            use: [{
+                loader: 'style-loader',
+            },{
+                loader: 'css-loader',
+            },{
+                loader: 'stylus-loader',
+                options: { use: [require('nib')()] }
+            }],
         }],
     },
+};
+
+module.exports = function(ext){
+    // mixin the base config underneath the dev config object
+    return Object.keys(base).reduce((acc, key) => {
+        acc[key] = acc[key] === undefined ? base[key] : acc[key];
+        return acc;
+    }, ext);
 };

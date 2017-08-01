@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Timer from './Timer.js'
+import {} from './timer.js'
 
 export default Vue.component('az-app', {
     render(){

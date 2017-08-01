@@ -1,5 +1,8 @@
 {
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:flowtype/recommended"
+    ],
     "env":{
         "browser": true,
         "node": true,
@@ -12,7 +15,8 @@
         "no-eval":"error",
         "no-console":"warn",
         "quotes":["warn", "single"],
-        "no-unused-vars":"warn"
+        "no-unused-vars":"warn",
+        "flowtype/no-types-missing-file-annotation": "off"
     },
     "parserOptions":{
         "sourceType": "module",

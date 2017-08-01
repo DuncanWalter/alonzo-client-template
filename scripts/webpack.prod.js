@@ -1,27 +1,7 @@
 const webpack = require('webpack');
+var extend = require('./webpack.base');
 
-const config = {
-    entry: './src/index.js',
-    output: {
-        path: __dirname + './../dist',
-        filename: 'index.bundle.js',
-        library: 'alonzo-client-template',
-        libraryTarget: 'umd',
-    },
-    module: { 
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    plugins: ['transform-vue-jsx'],
-                    presets: ['es2015', 'flow'],
-                    cacheDirectory: true,
-                }
-            }],
-        }],
-    },
+const config = extend({
     plugins: [
         new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -39,7 +19,7 @@ const config = {
             comments: false,
         }),
     ],
-};
+});
 
 console.log("> Starting production build...");
 

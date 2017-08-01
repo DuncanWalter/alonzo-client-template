@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var base = require('./webpack.base');
+var extend = require('./webpack.base');
 // var args = require('minimist')(process.argv.slice(2));
 // var pkgs = require('./../package.json').dependencies;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,7 +12,7 @@ var Express = require('express');
 //====================================================================//
 ////////////////////////////////////////////////////////////////////////
 
-let config = {
+let config = extend({
     entry: [
         './src/index.js',
         'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
@@ -27,14 +27,8 @@ let config = {
             inject: true,
         }),
         new FriendlyErrorsPlugin(),
-    ]
-};
-
-// mixin the base config underneath the dev config object
-Object.keys(base).reduce((acc, key) => {
-    acc[key] = acc[key] === undefined ? base[key] : acc[key];
-    return acc;
-}, config);
+    ],
+});
 
 ////////////////////////////////////////////////////////////////////////
 //====================================================================//

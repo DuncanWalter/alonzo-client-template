@@ -1,3 +1,4 @@
+// TODO magic with package json to exclude other client templates
 
 const base = {
     entry: './src/index.js',
@@ -7,6 +8,9 @@ const base = {
         library: 'alonzo-client-template',
         libraryTarget: 'this',
     },
+    // excludes: [
+        // TODO
+    // ],
     module: { 
         rules: [{
             test: /\.js$/,
@@ -15,7 +19,7 @@ const base = {
                 loader: 'babel-loader',
                 options: {
                     plugins: ['transform-vue-jsx'],
-                    presets: ['es2015', 'flow'],
+                    presets: ['es2015'/*, 'flow'*/],
                     cacheDirectory: true,
                 }
             }],
@@ -30,7 +34,21 @@ const base = {
                 loader: 'stylus-loader',
                 options: { use: [require('nib')()] }
             }],
+        },{
+            test: /\.(png|svg|gif|otf|ttf)$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 2000,
+                    name: 'static/[name].[hash:8].[ext]',
+                }
+            }],
         }],
+    },
+    resolve:{
+        alias: {
+            '~': __dirname + './../',
+        },
     },
 };
 

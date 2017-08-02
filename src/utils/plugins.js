@@ -1,16 +1,24 @@
+/*
+Dynamically loading JS plugins is an operation rife with HMR and security challenges.
+This module aims to tackle that problem so that it doesn't need to be reinvented all the time.
+Hopefully this also allows for greater importing flexibility in the long run.
+*/
 
-window.__modules__ = window.__modules__ || { raw: {}, promised: {} }
-var _modules: { raw: {[string]: any}, promised: {[string]: Promise<any>} } = window.__modules__;
+window.__modules__ = window.__modules__ || { raw: {}, promised: {} };
+var _modules = window.__modules__;
 
-export function inject(modules: {[string]: any}){
+// plugin :: ([string]: module) -> void
+export function inject(modules){
     Object.keys(modules).reduce((acc, key) => {
         acc.raw[key] = modules[key];
         acc.promised[key] = Promise.resolve(acc.raw[key]);
+        return acc;
     }, _modules);
 }
 
-export function plugin(...modules: Array<string>){
-    modules.reduce((acc: {[string]: any}, mod)=>{
+// plugin :: (string[]) -> void
+export function plugin(...modules){
+    modules.reduce((acc, mod)=>{
         if((_modules||{})[mod] !== undefined){
             acc[mod] = _modules[mod];
         } else {

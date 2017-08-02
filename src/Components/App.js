@@ -1,8 +1,19 @@
-import Vue from 'vue'
-import {} from './timer.js'
+import Timer from './timer.js'
+import wp from '~/static/logo.png'
 
-export default Vue.component('az-app', {
-    render(){
-        return ( <az-timer/> );
+// app.js defines the root vue component of a web application.
+// the default export is a vue settings object.
+export default {
+    props:['env' /* 'prod' | 'dev' */],
+    components: {
+        Timer: Timer
     },
-});
+    render(){
+        return (
+            <div>
+                <Timer/>
+                <img src={ wp }/>
+            </div>
+        );
+    },
+};

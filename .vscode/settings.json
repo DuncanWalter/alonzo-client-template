@@ -1,7 +1,10 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "javascript.validate.enable": false,
     "eslint.options": {
         "configFile": "./.eslintrc.json"
     }
+    // Path to flow binary. On Windows use '\\' as directory separator
+    // "flow.pathToFlow": "node_modules\\.bin\\flow",
+    // "flow.runOnAllFiles": true,
+    // "flow.useNPMPackagedFlow":true
 }

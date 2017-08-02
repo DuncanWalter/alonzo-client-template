@@ -1,7 +1,6 @@
 {
     "extends": [
-        "eslint:recommended",
-        "plugin:flowtype/recommended"
+        "eslint:recommended"
     ],
     "env":{
         "browser": true,
@@ -15,8 +14,7 @@
         "no-eval":"error",
         "no-console":"warn",
         "quotes":["warn", "single"],
-        "no-unused-vars":"warn",
-        "flowtype/no-types-missing-file-annotation": "off"
+        "no-unused-vars":"warn"
     },
     "parserOptions":{
         "sourceType": "module",
@@ -24,11 +22,5 @@
             "jsx": true
         }
     },
-    "parser": "babel-eslint",
-    "plugins": [ "flowtype" ],
-    "settings": {
-        "flowtype": {
-            "onlyFilesWithFlowAnnotation": false
-        }
-    }
+    "parser": "babel-eslint"
 }

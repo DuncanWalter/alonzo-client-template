@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import styles from './../index.styl'
+import styles from '~/src/index.styl'
 
 console.log('styles:');
 console.log(styles);
 
-export default Vue.component('az-timer', {
+export default {
     data: ()=>{
         let data = { 
             time: (new Date()).getSeconds(),
@@ -18,4 +18,4 @@ export default Vue.component('az-timer', {
     beforeDestroy(){
         clearInterval(this.interval);
     },
-});
+};

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { } from './components/app.js'
+import App from './components/app.js'
 import { inject } from './utils/plugins.js'
 
 // Expose the global style glob for independent consumption
@@ -12,10 +12,12 @@ export { plugin } from './utils/plugins.js'
         'alonzo-client-template': module.exports
     });
     if(Vue.component('az-root') === undefined){
-        console.log('> Bootstrapping app!');
         Vue.component('az-root', {
+            components: {
+                'App': App,
+            },
             render(){
-                return ( <az-app/> );
+                return ( <App env={ module.hot ? 'dev' : 'prod' }/> );
             },
         });
         var vm = new Vue({ 
@@ -34,8 +36,7 @@ export { plugin } from './utils/plugins.js'
 })(document.getElementById('anchor'));
 
 if(module.hot){ 
-    // enables HMR // $FlowFixMe
-    module.hot.accept(); 
-    // console.log(module); 
+    // enables HMR
+    module.hot.accept();
 }
 

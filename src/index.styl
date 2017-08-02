@@ -1,5 +1,173 @@
-@import 'nib'
+@require 'nib'
 
-.header 
-    color: blue;
-    font-size: 97pt;
+@font-face 
+    font-family: 'Roboto';
+    src: url(../static/fonts/roboto-regular.ttf);
+
+@font-face 
+    font-family: 'Chosence';
+    src: url(../static/fonts/chosence.regular.otf);
+
+// neutral palette
+dark = #212121
+light = #fafafa
+
+// color palette
+pri = #ef6c00 // light
+acc = #ff9d3f // light
+alt = #b53d00 // dark
+val = #00704b // dark
+err = #a30437 // dark
+
+// the style for the shadows used by materials
+shadow( depth )
+    box-shadow: 
+        0 1px 2px rgba(0,0,0,0.30),
+        0 (depth * 0.5px) (depth * 1.1px) rgba(0,0,0,0.20), 
+        0 (depth * 0.7px) (depth * 1.5px) rgba(0,0,0,0.10);
+
+// emulating google materials
+material( depth, color )
+    shadow( depth )
+    background-color: color
+    if lightness( color ) > 0.5
+        color: dark
+    else
+        color: light
+    &:hover
+        shadow( depth * 1.3 + 5 )
+
+
+
+h1 {
+    font-family: Chosence, Roboto, sans-serif;
+    font-size: 42pt;
+    margin: 1.5rem;
+    letter-spacing: 5px;
+    text-align: center;
+}
+p {
+    line-height: 1.4;
+    margin: 0.65rem 1.3rem 0.65rem;
+    font-size: inherit;
+    flex: 1;
+}
+b {
+    font-size: 14pt;
+    letter-spacing: 2px;
+    font-family: Chosence, Roboto, sans-serif;
+}
+b.norm {
+    font-size: 13pt;
+    letter-spacing: 0;
+    font-family: Roboto, sans-serif;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    margin:0;
+    display: flex;
+}
+.col {
+    margin:0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+div {
+    font-size: inherit;
+}
+.box {
+    transition: background-color 0.15s ease;
+}
+
+.light .box {
+    border: solid #222222 2px;
+    margin: 0 1.95rem;
+    padding: 0.65rem 0 0.65rem;
+    background-color: #FAFAFA;
+}
+.light .box:hover {
+    background-color: rgba(22,22,22,0.08);
+}
+.dark .box {
+    border: 2px solid #FAFAFA;
+    margin: 1.3rem;
+    padding: 0.65rem 0 0.65rem;
+    background-color: #222222;
+}
+.dark .box:hover {
+    background-color: rgba(249,249,249,0.08);
+}
+.light {
+    background-color: #FAFAFA;
+    color: #1A1A1A;
+}
+.dark {
+    background-color: #222222;
+    color: #FAFAFA;
+}
+.dark hr {
+    background-color: #FAFAFA;
+}
+.light hr {
+    background-color: #222222;
+}
+
+.f1 { flex: 1  ; }
+.f2 { flex: 2  ; }
+.f3 { flex: 3  ; }
+.f4 { flex: 4  ; }
+.f5 { flex: 5  ; }
+.f6 { flex: 6  ; }
+.f7 { flex: 7  ; }
+.f8 { flex: 8  ; }
+.f9 { flex: 9  ; }
+.f10{ flex: 10 ; }
+.f11{ flex: 11 ; }
+.f12{ flex: 12 ; }
+
+.square {
+    position: relative;
+    width: 100%;
+}
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+button {
+    padding: 7pt 7pt 4pt;
+    text-align: center;
+    font-family: Chosence, Roboto, sans-serif;
+    font-size: 13pt;
+    background-color: transparent;
+    border: solid 2px #FAFAFA;
+    cursor: hand;
+    transition: 0.45s ease;
+    margin: 0 1.3rem 1.3rem;
+    color: #FAFAFA;
+}
+button:hover {
+    background-color: #FAFAFA;
+    color: #222222;
+}
+input {
+    background-color: transparent;
+    padding: 7pt 0 4pt;
+    text-align: center;
+    font-family: Chosence, Roboto, sans-serif;
+    font-size: 13pt;
+    border: none;
+    color: #FAFAFA;
+}

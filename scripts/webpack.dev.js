@@ -67,8 +67,6 @@ app.use(devMiddleware);
 // compilation error display
 app.use(hotMiddleware);
 
-app.use(__dirname + './../', Express.static('/assets/'));
-
 app.use(function (req, res, next){
     let filePath;
     if(/.*([a-zA-Z0-9_-]+)\.plugin\.js$/.test(req.path)){

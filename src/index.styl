@@ -1,12 +1,37 @@
+// nib handles a bunch of cross browser issues, etc
 @require 'nib'
+@require './../node_modules/jeet/styl/index.styl'
+
+@font-face
+    font-family: Roboto
+    src: url(../static/fonts/roboto-regular.ttf)
 
 @font-face 
-    font-family: 'Roboto';
-    src: url(../static/fonts/roboto-regular.ttf);
-
-@font-face 
-    font-family: 'Chosence';
+    font-family: Chosence
     src: url(../static/fonts/chosence.regular.otf);
+
+// extremely crude global responsives
+// most responsive design should be handled on a component basis
+@media (min-width: 1200px)
+    html  
+        font-size: 13pt
+    .container  
+        span( 0.62, 0.19 )
+
+@media (max-width: 1200px) and (min-width: 700px)
+    html
+        font-size: 12pt 
+    .container
+        span( 0.78, 0.11 )
+
+@media (max-width: 700px)
+    html 
+        font-size: 11pt
+    .container 
+        span( 0.92, 0.04 )     
+
+html 
+    font-family: Roboto, sans-serif
 
 // neutral palette
 dark = #212121
@@ -19,109 +44,134 @@ alt = #b53d00 // dark
 val = #00704b // dark
 err = #a30437 // dark
 
+// scales by material guide
+small = 1.2rem
+body  = 1.4rem
+large = 1.6rem
+head  = 2.0rem
+title = 3.6rem
+
+* { transition: inherit }
+
 // the style for the shadows used by materials
 shadow( depth )
     box-shadow: 
-        0 1px 2px rgba(0,0,0,0.30),
-        0 (depth * 0.5px) (depth * 1.1px) rgba(0,0,0,0.20), 
-        0 (depth * 0.7px) (depth * 1.5px) rgba(0,0,0,0.10);
+        0 0 2px rgba(0,0,0,0.18),
+        0 (depth * 0.2px) (depth * 0.4px) (depth * 0.2px) rgba(0,0,0,0.18), 
+        0 (depth * 0.3px) (depth * 0.8px) (depth * 0.4px) rgba(0,0,0,0.08);
+
+
+// ensuring easy font contrast TODO error on weird greyscale
+colored( color )
+    transition: 0.2s ease
+    background-color: color
+    if lightness( color ) > 50%
+        color: alpha(dark, 0.92)
+    else
+        color: alpha(light, 0.92)
 
 // emulating google materials
 material( depth, color )
+    colored( color )
     shadow( depth )
-    background-color: color
-    if lightness( color ) > 0.5
-        color: dark
-    else
-        color: light
+
+// mouse-over feedback for elements with interactions
+interactive( depth, color )
+    material( depth, color )
     &:hover
-        shadow( depth * 1.3 + 5 )
+        shadow( depth * 1.4 + 7 )
+        if lightness( color ) > 50%
+            background-color: tint( color, 3% )
+        else
+            background-color: shade( color, 3% )
 
+pads( scale )
+    padding: (scale * 0.4)
 
+margins( scale )
+    margin: (scale * 0.4)
 
-h1 {
-    font-family: Chosence, Roboto, sans-serif;
-    font-size: 42pt;
-    margin: 1.5rem;
-    letter-spacing: 5px;
-    text-align: center;
-}
-p {
-    line-height: 1.4;
-    margin: 0.65rem 1.3rem 0.65rem;
-    font-size: inherit;
-    flex: 1;
-}
-b {
-    font-size: 14pt;
-    letter-spacing: 2px;
-    font-family: Chosence, Roboto, sans-serif;
-}
-b.norm {
-    font-size: 13pt;
-    letter-spacing: 0;
-    font-family: Roboto, sans-serif;
-}
-body {
-    margin: 0;
-    min-height: 100vh;
-    background-color: #222222;
+.padded
+    pads( body )
+
+.guarded
+    margins( body )
+
+.card
+    interactive( 7, dark )
+    & .header
+        colored( pri )
+        pads( body )
+    & .content
+        colored( light )
+        pads( body )
+    & .focus
+        colored( acc )
+        pads( body )
+    & .contrast
+        colored( dark )
+        pads( body )
+    & .hollow
+        pads( body )
+    & hr
+        height: 3px
+        width: 100%
+        margin: 0
+        border: none
+
+.img, img
+    object-fit: contain
+    width: 100%
+    height: 100%
+
+h1
+    font-size: title
+    margin: large
+    letter-spacing: 0.2rem
+
+p
+    margin: (body * 0.3)
+    font-size: body
+
+.centered
+    align-content: center
+    text-align: center
+    justify-content: center
+    align-items: center
+
+body 
+    margin: 0
+    min-height: 100vh
+    colored( tint(dark, 15%) )
+
+.row 
+    display: flex
+    align-items: center
+    justify-content: center
+
+.col 
+    height: 100%
     display: flex;
     flex-direction: column;
-}
-
-.row {
-    margin:0;
-    display: flex;
-}
-.col {
-    margin:0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
 
 
 
-div {
-    font-size: inherit;
-}
-.box {
-    transition: background-color 0.15s ease;
-}
 
-.light .box {
-    border: solid #222222 2px;
-    margin: 0 1.95rem;
-    padding: 0.65rem 0 0.65rem;
-    background-color: #FAFAFA;
-}
-.light .box:hover {
-    background-color: rgba(22,22,22,0.08);
-}
-.dark .box {
-    border: 2px solid #FAFAFA;
-    margin: 1.3rem;
-    padding: 0.65rem 0 0.65rem;
-    background-color: #222222;
-}
-.dark .box:hover {
-    background-color: rgba(249,249,249,0.08);
-}
-.light {
-    background-color: #FAFAFA;
-    color: #1A1A1A;
-}
-.dark {
-    background-color: #222222;
-    color: #FAFAFA;
-}
-.dark hr {
-    background-color: #FAFAFA;
-}
-.light hr {
-    background-color: #222222;
-}
+
+// .light {
+//     background-color: #FAFAFA;
+//     color: #1A1A1A;
+// }
+// .dark {
+//     background-color: #222222;
+//     color: #FAFAFA;
+// }
+// .dark hr {
+//     background-color: #FAFAFA;
+// }
+// .light hr {
+//     background-color: #222222;
+// }
 
 .f1 { flex: 1  ; }
 .f2 { flex: 2  ; }
@@ -146,22 +196,23 @@ div {
     padding-bottom: 100%;
 }
 
-button {
-    padding: 7pt 7pt 4pt;
-    text-align: center;
-    font-family: Chosence, Roboto, sans-serif;
-    font-size: 13pt;
-    background-color: transparent;
-    border: solid 2px #FAFAFA;
-    cursor: hand;
-    transition: 0.45s ease;
-    margin: 0 1.3rem 1.3rem;
-    color: #FAFAFA;
-}
-button:hover {
-    background-color: #FAFAFA;
-    color: #222222;
-}
+// button {
+//     padding: 7pt 7pt 4pt;
+//     text-align: center;
+//     font-family: Chosence, Roboto, sans-serif;
+//     font-size: 13pt;
+//     background-color: transparent;
+//     border: solid 2px #FAFAFA;
+//     cursor: hand;
+//     transition: 0.45s ease;
+//     margin: 0 1.3rem 1.3rem;
+//     color: #FAFAFA;
+// }
+// button:hover {
+//     background-color: #FAFAFA;
+//     color: #222222;
+// }
+
 input {
     background-color: transparent;
     padding: 7pt 0 4pt;

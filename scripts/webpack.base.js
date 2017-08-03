@@ -8,13 +8,10 @@ const base = {
         library: 'alonzo-client-template',
         libraryTarget: 'this',
     },
-    // excludes: [
-        // TODO
-    // ],
     module: { 
         rules: [{
             test: /\.js$/,
-            exclude: /node_modules/,
+            exclude: /node_modules\//,
             use: [{
                 loader: 'babel-loader',
                 options: {
@@ -25,7 +22,6 @@ const base = {
             }],
         },{
             test: /\.(styl|css)$/,
-            exclude: /node_modules/,
             use: [{
                 loader: 'style-loader',
             },{
@@ -35,7 +31,7 @@ const base = {
                 options: { use: [require('nib')()] }
             }],
         },{
-            test: /\.(png|svg|gif|otf|ttf)$/,
+            exclude: /\.(styl|css|js|html)$/,
             use: [{
                 loader: 'url-loader',
                 options: {

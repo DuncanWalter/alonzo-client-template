@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './components/app.js'
 import { inject } from './utils/plugins.js'
+import manifest from './../manifest.json'
 
 // Expose the global style glob for independent consumption
 export { default as styles } from './index.styl'
@@ -14,7 +15,7 @@ export { plugin } from './utils/plugins.js'
     if(Vue.component('az-root') === undefined){
         Vue.component('az-root', {
             components: {
-                'App': App,
+                App: App
             },
             render(){
                 return ( <App env={ module.hot ? 'dev' : 'prod' }/> );

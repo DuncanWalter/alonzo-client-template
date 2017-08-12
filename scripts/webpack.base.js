@@ -1,11 +1,16 @@
 // TODO magic with package json to exclude other client templates
 
+const pkg = require('./../package.json');
+const webpack = require('webpack');
+
 const base = {
-    entry: './src/index.js',
+    entry: [
+        './src/index.js'
+    ],
     output: {
         path: __dirname + './../dist',
         filename: 'index.bundle.js',
-        library: 'alonzo-client-template',
+        library: pkg.name,
         libraryTarget: 'this',
     },
     module: { 
@@ -16,7 +21,7 @@ const base = {
                 loader: 'babel-loader',
                 options: {
                     plugins: ['transform-vue-jsx'],
-                    presets: ['es2015'/*, 'flow'*/],
+                    presets: ['es2015', 'flow'],
                     cacheDirectory: true,
                 }
             }],
@@ -46,12 +51,38 @@ const base = {
             '~': __dirname + './../',
         },
     },
+    plugins: [
+        // new webpack.DllPlugin({
+        //     path: __dirname + './../dist/plugin.json',
+        //     name: pkg.name,
+        // }),
+    ],
 };
 
-module.exports = function(ext){
+module.exports = (function extend(base, ext){
     // mixin the base config underneath the dev config object
-    return Object.keys(base).reduce((acc, key) => {
-        acc[key] = acc[key] === undefined ? base[key] : acc[key];
-        return acc;
-    }, ext);
-};
+
+    switch(true){
+        case base === undefined: 
+        return ext;
+
+        case ext === undefined:
+        return base;
+
+        case base instanceof Array && ext instanceof Array:
+        return base.reduce((a, e) => {
+            a.push(e);
+            return a;
+        }, ext);
+
+        case base instanceof Object && ext instanceof Object:
+        return Object.keys(base).reduce((acc, key) => {
+            acc[key] = extend(base[key], acc[key]);
+            return acc;
+        }, ext);
+
+        default:
+        return base;
+    }
+
+}).bind({}, base);

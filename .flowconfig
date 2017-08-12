@@ -1,0 +1,14 @@
+[ignore]
+.*/node_modules/.*
+.*/scripts/.*
+.*/dist/.*
+.*/scripts/.*
+
+[options]
+experimental.const_params=true
+module.use_strict=true
+emoji=true
+all=true
+module.name_mapper='.*\.\(svg\|png\|styl\|css\)$' -> '<PROJECT_ROOT>/static/flowTypes/external'
+module.name_mapper='.*/node_modules/.*' -> '<PROJECT_ROOT>/static/flowTypes/external'
+module.name_mapper='^[^/]*$' -> '<PROJECT_ROOT>/static/flowTypes/external'

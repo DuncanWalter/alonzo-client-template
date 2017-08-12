@@ -2,9 +2,10 @@
 {
     "eslint.options": {
         "configFile": "./.eslintrc.json"
-    }
+    },
     // Path to flow binary. On Windows use '\\' as directory separator
     // "flow.pathToFlow": "node_modules\\.bin\\flow",
-    // "flow.runOnAllFiles": true,
-    // "flow.useNPMPackagedFlow":true
+    "flow.runOnAllFiles": true,
+    "flow.useNPMPackagedFlow":true,
+    "javascript.validate.enable": false
 }

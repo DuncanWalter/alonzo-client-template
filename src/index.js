@@ -1,14 +1,12 @@
 import Vue from 'vue'
 import App from './components/app.js'
 import { inject } from './utils/plugins.js'
-import manifest from './../manifest.json'
 
 // Expose the global style glob for independent consumption
 export { default as styles } from './index.styl'
-export { plugin } from './utils/plugins.js'
 
 // HMR friendly bootstrapping for the modern era
-(function bootstrap(el){
+(function bootstrap(el: any){
     inject({
         'alonzo-client-template': module.exports
     });
@@ -37,7 +35,7 @@ export { plugin } from './utils/plugins.js'
 })(document.getElementById('anchor'));
 
 if(module.hot){ 
-    // enables HMR
+    // enables HMR // $FlowFixMe
     module.hot.accept();
 }
 

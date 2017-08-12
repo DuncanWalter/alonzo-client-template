@@ -1,7 +1,5 @@
 var webpack = require('webpack');
 var extend = require('./webpack.base');
-// var args = require('minimist')(process.argv.slice(2));
-// var pkgs = require('./../package.json').dependencies;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 var Express = require('express');
@@ -14,7 +12,7 @@ var Express = require('express');
 
 let config = extend({
     entry: [
-        './src/index.js',
+        // './src/index.js',
         'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     ],
     devtool: 'cheap-eval-source-map',
@@ -78,7 +76,6 @@ app.use(function (req, res, next){
         filePath = __dirname + './../dist/index.bundle.js';
         compiler.outputFileSystem.readFile(filePath, function(err, result){
             if(err){ return next(err); }
-            res.set('content-type','text/html');
             res.send(result);
             res.end();
         });

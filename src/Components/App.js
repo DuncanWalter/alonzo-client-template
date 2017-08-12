@@ -1,7 +1,6 @@
-import Vue from 'vue'
 import vl from '~/static/vue.png'
 import wp from '~/static/webpack.svg'
-import st from '~/static/stylus.svg'
+import st from '~/static/stylus.svg' 
 import el from '~/static/eslint.svg'
 
 // app.js defines the root vue component of a web application.
@@ -10,7 +9,6 @@ export default {
     components: {
         // imported components
     },
-    props:['env' /* 'prod' | 'dev' */],
     render(){
         return (
             <div class='container centered col'>

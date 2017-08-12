@@ -1,7 +1,7 @@
 ## **Alonzo Client Template**
 -----------------------------
 
-The Alonzo Client Template is meant to provide a straightforward boilerplate for developing in a Vue, JSX, and FlowType environment. It does not contain any features specific to the Alonzo project, so feel free to use it for any project with highly dynamic UI needs. 
+The Alonzo Client Template is meant to provide a straightforward boilerplate for developing in a Vue, JSX, and Stylus environment. See the 'Features' section for details.
 
 
 ## **Usage**
@@ -12,7 +12,7 @@ There are two steps to getting up and running with this template. First, clone t
 > git clone https://github.com/DuncanWalter/alonzo-client-template.git
 > npm install
 ```
-Then, configure your workspace to enable proper FlowType and eslint highlighting as you code. This requires an editor extension for eslint. That extension may require a setting pointing it to an eslintrc.json file, which is provided in the template. This repository has that setting built in for vsCode, along with a setting which ignores es5 syntax validation. If you would like to add similar support for your favorite editor, please make a pull request with those additions so we can share what you learned. 
+Then, configure your workspace to enable eslint highlighting as you code. This requires an editor extension for eslint. That extension may require a setting pointing it to an eslintrc.json file, which is provided in the template. This repository has that setting built in for vsCode, along with a setting which ignores es5 syntax validation. If you would like to add similar support for your favorite editor, please make a pull request with those additions so we can share what you learned. 
 
 - Install eslint extention for your editor
 - If not using vsCode, point eslint extension to eslintrc.json

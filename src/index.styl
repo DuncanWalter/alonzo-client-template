@@ -98,7 +98,8 @@ margins( scale )
     margins( body )
 
 .card
-    interactive( 7, dark )
+    material( 7, dark )
+    margins( body )
     & .header
         colored( pri )
         pads( body )
@@ -148,14 +149,17 @@ body
     display: flex
     align-items: center
     justify-content: center
+    & .stacked
+        margin: 0 (body*0.4) 0
 
 .col 
-    height: 100%
+    // height: 100%
     display: flex;
     flex-direction: column;
 
-
-
+.button.clear
+    pads(small)
+    cursor: pointer
 
 
 // .light {

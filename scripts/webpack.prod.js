@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const extend = require('./webpack.base');
 const npmpkg = require('./../package.json');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const deps = Object.keys(npmpkg.dependencies);
 
 // extract plugins from child chunks
@@ -30,6 +31,11 @@ const config = extend({
                 screw_ie8: true,
             },
             comments: false,
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.bundle.html',
+            template: './src/index.html',
+            inject: true,
         }),
     ],
 });

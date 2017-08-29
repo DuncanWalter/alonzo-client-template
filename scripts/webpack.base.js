@@ -1,7 +1,7 @@
 // TODO magic with package json to exclude other client templates
 
 const pkg = require('./../package.json');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 const base = {
     entry: [
@@ -21,7 +21,14 @@ const base = {
                 loader: 'babel-loader',
                 options: {
                     plugins: ['transform-vue-jsx'],
-                    presets: ['es2015', 'flow'],
+                    presets: [['env', {
+                        targets: {
+                            browsers: [
+                                '> 5%',
+                            ],
+                            node: 'current',
+                        }
+                    }], 'flow'],
                     cacheDirectory: true,
                 }
             }],
@@ -52,10 +59,7 @@ const base = {
         },
     },
     plugins: [
-        // new webpack.DllPlugin({
-        //     path: __dirname + './../dist/plugin.json',
-        //     name: pkg.name,
-        // }),
+        
     ],
 };
 

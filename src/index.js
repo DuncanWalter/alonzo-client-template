@@ -1,22 +1,23 @@
 import Vue from 'vue'
 import App from './components/app.js'
-import { inject } from './utils/plugins.js'
+// import { inject } from './services/plugins.js'
+import { view } from './services/store.js'
 
 // Expose the global style glob for independent consumption
 export { default as styles } from './index.styl'
 
 // HMR friendly bootstrapping for the modern era
 (function bootstrap(el: any){
-    inject({
-        'alonzo-client-template': module.exports
-    });
+    // inject({
+    //     'alonzo-client-template': module.exports
+    // });
     if(Vue.component('az-root') === undefined){
         Vue.component('az-root', {
             components: {
                 App: App
             },
             render(){
-                return ( <App env={ module.hot ? 'dev' : 'prod' }/> );
+                return ( <App sil={ view }/> );
             },
         });
         var vm = new Vue({ 

@@ -12,3 +12,5 @@ all=true
 module.name_mapper='.*\.\(svg\|png\|styl\|css\)$' -> '<PROJECT_ROOT>/static/flowTypes/external'
 module.name_mapper='.*/node_modules/.*' -> '<PROJECT_ROOT>/static/flowTypes/external'
 module.name_mapper='^[^/]*$' -> '<PROJECT_ROOT>/static/flowTypes/external'
+module.name_mapper='^~\(.*\)$' -> '<PROJECT_ROOT>\1'
+suppress_type=any

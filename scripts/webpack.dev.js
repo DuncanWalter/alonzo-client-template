@@ -12,10 +12,9 @@ var Express = require('express');
 
 let config = extend({
     entry: [
-        // './src/index.js',
         'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     ],
-    devtool: 'cheap-eval-source-map',
+    // devtool: 'cheap-eval-source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),

@@ -1,4 +1,0 @@
-## **Styles**
--------------
-
-Alonzo client modules export a module style sheet. This superficially simple feature introduces a headache when it comes to css imports. Local styles will often import module styles. Module styles are large, and should be composed of several smaller style sheets. These two import schemes are opposite of one another, and therefore should not exist in the same file tree. This Styles directory exists to alleviate that problem; should the module style sheet become large enough to justify splitting, its dependencies should be added here. This leaves the Components directory free to house component specific styles.

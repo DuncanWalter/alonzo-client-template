@@ -1,6 +1,7 @@
 // nib handles a bunch of cross browser issues, etc
 @require 'nib'
 @require './../node_modules/jeet/styl/index.styl'
+@require './../node_modules/font-awesome/css/font-awesome.min.css'
 
 @font-face
     font-family: Roboto
@@ -162,20 +163,7 @@ body
     cursor: pointer
 
 
-// .light {
-//     background-color: #FAFAFA;
-//     color: #1A1A1A;
-// }
-// .dark {
-//     background-color: #222222;
-//     color: #FAFAFA;
-// }
-// .dark hr {
-//     background-color: #FAFAFA;
-// }
-// .light hr {
-//     background-color: #222222;
-// }
+
 
 .f1 { flex: 1  ; }
 .f2 { flex: 2  ; }
@@ -217,12 +205,12 @@ body
 //     color: #222222;
 // }
 
-input {
-    background-color: transparent;
-    padding: 7pt 0 4pt;
-    text-align: center;
-    font-family: Chosence, Roboto, sans-serif;
-    font-size: 13pt;
+textarea {
+    background-color: lighten(dark, 5%);
+    color: inherit;
+    pads(body);
+    font-size: inherit;
+    font-family: Roboto, sans-serif;
     border: none;
-    color: #FAFAFA;
+    border-radius: 3px;
 }

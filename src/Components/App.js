@@ -4,7 +4,7 @@
 // import el from '~/static/eslint.svg'
 
 import { view } from '~/src/services/store'
-import comment from './counter'
+import comment from './comment'
 
 
 // app.js defines the root vue component of a web application.

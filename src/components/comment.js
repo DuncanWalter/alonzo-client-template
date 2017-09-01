@@ -1,7 +1,10 @@
-// an example of how vue plugins might work with silhouette
+
+// an example of how vue plugins might work with silhouette.
+// The code enclosed in these comments would be invisible.
 ///////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
+
 let gen = (function*(){
     let i = 0;
     while (true) {
@@ -28,8 +31,7 @@ function augment(component) {
 
     component.data = function(...args){
         let __data__ = (data || (() => {return {};})).call(this, ...args);
-        console.log('DATA', __data__);
-        if (shape instanceof Object) {
+        if(shape instanceof Object){
             shape.id = id();
             Object.keys(shape).forEach(key => {
                 if (__data__[key] === undefined) {
@@ -40,17 +42,14 @@ function augment(component) {
             this.id = this.id || id();
         }
         this.sil.define(shape);
-        console.log('CREATED DATA', __data__);
         return __data__;
     };
 
     component.render = function(...args){
-        console.log(this, this._data);
         this.sil.asObservable().subscribe(val => {
             if (val instanceof Object) {
                 Object.keys(val).forEach(key => {
                     if (this._data[key] !== val[key]) {
-                        console.log('updating...', this._data, '->', val[key]);
                         this._data[key] = val[key];
                     }
                 });
@@ -59,11 +58,9 @@ function augment(component) {
         bind(behavior(this.id), this._data, this.sil);
         return render.call(this, ...args);
     };
-
-    console.log(component);
-
     return component;
 }
+
 ///////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -72,7 +69,6 @@ function augment(component) {
 let inputField = augment({
     shape: '',
     behavior(id){
-        console.log('ID', id);
         return {
             ['text-entry'](s, a) {
                 return id === a.id ? a.text : s;
@@ -83,10 +79,9 @@ let inputField = augment({
         let temp = undefined;
         this.sil.asObservable().subscribe(t => temp = t);
         return <textarea value={temp} autofocus onInput={ event => {
-            console.log('EVENT', event, this.text + event.data);
             this.sil.dispatch('text-entry', { id: this.id, text: event.target.value });
         } } />;
-    }
+    },
 });
 
 console.log('INPUT FIELD', inputField);
@@ -97,11 +92,11 @@ export default augment({
         'input-field': inputField
     },
     shape: {
-        text: 'PLACEHOLDER TEXT',
+        text: '',
         score: 0,
         collapsed: false,
         children: [],
-        editing: false,
+        editing: true,
     },
     behavior(id){
         return {
@@ -142,10 +137,12 @@ export default augment({
                 <div class='f1'></div>
             </div>
             <div class='row'>
-                <div class='button clear' onClick={() => d('down-vote', i)}><i class='fa fa-chevron-left'/></div>
-                <div class='button clear'>{ this.score }</div>
-                <div class='button clear' onClick={() => d('up-vote', i)}><i class='fa fa-chevron-right'/></div>
-                <div class='button clear' onClick={() => d('add comment', i)}><i class='fa fa-reply'/></div>
+                { this.editing ? [] : [
+                    <div class='button clear' onClick={() => d('down-vote', i)}><i class='fa fa-chevron-left'/></div>,
+                    <div class='button clear'>{ this.score }</div>,
+                    <div class='button clear' onClick={() => d('up-vote', i)}><i class='fa fa-chevron-right'/></div>,
+                    <div class='button clear' onClick={() => d('add comment', i)}><i class='fa fa-reply'/></div>,
+                ]}
                 <div class='button clear' onClick={() => d('remove comment', i)}><i class='fa fa-remove'/></div>
                 <div class='button clear' onClick={() => d('set editing', i)}><i class={'fa fa-' + (this.editing ? 'save' : 'edit')}/></div>
                 <div class='f1'></div>

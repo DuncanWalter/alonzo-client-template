@@ -6,6 +6,11 @@
 import { view } from '~/src/services/store'
 import comment from './comment'
 
+view.define({
+    text: 'This is a root level comment',
+    score: 0,
+    editing: false,
+});
 
 // app.js defines the root vue component of a web application.
 // the default export is a vue settings object.
@@ -16,23 +21,13 @@ export default {
     render(){
         return <div class='container centered col'>
             <div class='card' style={{'min-width':'70%'}}>
+                <div class='header'>
+                    <p>This is a quick 'n dirty demonstration of state management using silhouette, a utility library for and slight alteration of the state atom (DFA) pattern. Check the dev console and open redux devtools to see some of the inner working of the machine.</p>
+                </div>
                 <div class='hollow'>
                     <comment sil={ view }/>
                 </div>
             </div>
         </div>
-
-            //         {/* <div class='centered hollow'><h1>HELLO TEMPLATE</h1></div>
-            //         <div class='centered focus'/>
-            //         <div class='content row'>
-            //             {[false, wp, vl, st, el, false].map(img => {
-            //                 return img ? 
-            //                 <div class='f2'><img src={ img } style={{width:'150px', height: '150px'}}/></div> :
-            //                 <div class='f1'></div>;
-            //             })}
-            //         </div>
-            //         <div class='centered focus'/>
-            //         <div class='hollow'/> */}
-        
     },
 };

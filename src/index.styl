@@ -33,6 +33,7 @@
 
 html 
     font-family: Roboto, sans-serif
+    font-size: body
 
 // neutral palette
 dark = #212121
@@ -52,7 +53,9 @@ large = 1.6rem
 head  = 2.0rem
 title = 3.6rem
 
-* { transition: inherit }
+* 
+    transition: inherit
+    font-size: inherit
 
 // the style for the shadows used by materials
 shadow( depth )
@@ -153,17 +156,13 @@ body
     & .stacked
         margin: 0 (body*0.4) 0
 
-.col 
-    // height: 100%
+.col
     display: flex;
     flex-direction: column;
 
 .button.clear
     pads(small)
     cursor: pointer
-
-
-
 
 .f1 { flex: 1  ; }
 .f2 { flex: 2  ; }
@@ -187,23 +186,6 @@ body
     display: block;
     padding-bottom: 100%;
 }
-
-// button {
-//     padding: 7pt 7pt 4pt;
-//     text-align: center;
-//     font-family: Chosence, Roboto, sans-serif;
-//     font-size: 13pt;
-//     background-color: transparent;
-//     border: solid 2px #FAFAFA;
-//     cursor: hand;
-//     transition: 0.45s ease;
-//     margin: 0 1.3rem 1.3rem;
-//     color: #FAFAFA;
-// }
-// button:hover {
-//     background-color: #FAFAFA;
-//     color: #222222;
-// }
 
 textarea {
     background-color: lighten(dark, 5%);

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import ElementUI from 'element-ui'
 import App from './components/app.js'
 // import { inject } from './services/plugins.js'
 import { view } from './services/store.js'
@@ -11,6 +12,7 @@ export { default as styles } from './index.styl'
     // inject({
     //     'alonzo-client-template': module.exports
     // });
+    Vue.use(ElementUI)
     if(Vue.component('az-root') === undefined){
         Vue.component('az-root', {
             components: {

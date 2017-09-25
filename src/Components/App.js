@@ -30,7 +30,6 @@ export default {
                 </div>
             </div>
         </div>
-        katex.render("\\frac{numerator}{denominator}", kat);
     },
 };
 

@@ -4,9 +4,6 @@ const npmpkg = require('./../package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const deps = Object.keys(npmpkg.dependencies);
 
-// extract plugins from child chunks
-const ready = require('./extract');
-
 // configure excluding parent chunks
 var external = deps.filter(dep =>
     /alonzo-client/.test(dep)

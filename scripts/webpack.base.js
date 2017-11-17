@@ -1,6 +1,7 @@
 // TODO magic with package json to exclude other client templates
 
 const pkg = require('./../package.json');
+const env = require('babel-preset-env');
 // const webpack = require('webpack');
 
 const base = {
@@ -21,7 +22,7 @@ const base = {
                 loader: 'babel-loader',
                 options: {
                     plugins: ['transform-vue-jsx'],
-                    presets: [['env', {
+                    presets: [[env, {
                         targets: {
                             browsers: [
                                 '> 5%',

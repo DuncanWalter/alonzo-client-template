@@ -1,6 +1,6 @@
 {
   "name": "alonzo-client-template",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/DuncanWalter/alonzo-client-template.git"
@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "silhouette": "^2.2.0",
-    "vue": "^2.5.5"
+    "vue": "^2.5.5",
+    "font-awesome": "^4.7.0"
   }
 }

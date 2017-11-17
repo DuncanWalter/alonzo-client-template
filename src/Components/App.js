@@ -24,6 +24,7 @@ export default {
                 <div class='header'>
                     <p>This is a quick 'n dirty demonstration of state management using silhouette, a utility library for and slight alteration of the state atom (DFA) pattern. Check the dev console and open redux devtools to see some of the inner working of the machine.</p>
                 </div>
+                <div id="kat"></div>
                 <div class='hollow'>
                     <comment sil={ view }/>
                 </div>
@@ -31,3 +32,5 @@ export default {
         </div>
     },
 };
+
+

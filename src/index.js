@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import TexPreproc from './helpers/texPreprocessor.js'
+import Katex from 'katex'
 import App from './components/app.js'
 // import { inject } from './services/plugins.js'
 import { view } from './services/store.js'
@@ -25,7 +27,7 @@ export { default as styles } from './index.styl'
         var vm = new Vue({ 
             el: el,
             render(){
-                return( <az-root/> );
+                return( <az-root/>);
             },
         });
         (window||{}).__bootstrap__ = {
@@ -41,4 +43,16 @@ if(module.hot){
     // enables HMR // $FlowFixMe
     module.hot.accept();
 }
+
+// todo: finish the texPreprocessor function in ./helpers/texPreprocessor file
+// the goal is to preprocess strings using the Tex syntax so that it could be parsed by Katex
+// the way is to change a backslash into double backslashes
+// example: Tex string "\sqrt{64} \ = \ 8" -> Katex string "\\sqrt{64} \\ = \\ 8"
+
+//todo: After you finish comment out the following line after you
+Katex.render("\\sqrt{64} \\ = \\ 8", kat);
+//todo: and then uncomment the last two lines wrapped in comments 
+
+// var texStr = "\sqrt{64} \ = \ 8";
+// Katex.render(TexPreproc(texStr),kat);
 

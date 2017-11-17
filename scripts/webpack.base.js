@@ -5,6 +5,9 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const path = require('path');
 const options = require('minimist')(process.argv.slice(2));
 
+const pkg = require('./../package.json');
+const env = require('babel-preset-env');
+// // const webpack = require('webpack');
 
 
 const plugins = (options => {
@@ -77,7 +80,7 @@ const config = {
                 loader: 'babel-loader',
                 options: {
                     plugins: ['transform-vue-jsx'],
-                    presets: [['env', {
+                    presets: [[env, {
                         targets: {
                             browsers: [
                                 '> 5%',

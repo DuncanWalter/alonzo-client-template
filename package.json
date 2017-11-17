@@ -9,8 +9,8 @@
   "main": "dist/index.bundle.js",
   "scripts": {
     "test": "test",
-    "dev": "node ./scripts/webpack.dev.js",
-    "prod": "node ./scripts/webpack.prod.js"
+    "dev": "node ./scripts/webpack.base.js --dev",
+    "prod": "node ./scripts/webpack.base.js --prod"
   },
   "author": "Duncan Walter",
   "license": "MIT",
@@ -48,6 +48,7 @@
   "dependencies": {
     "element-ui": "^1.4.4",
     "font-awesome": "^4.7.0",
+    "open-module": "^1.0.2",
     "silhouette": "^2.1.1",
     "vue": "^2.4.2"
   }
